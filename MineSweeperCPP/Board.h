@@ -2,7 +2,7 @@
 #ifndef BOARD
 #define BOARD
 
-void GenerationBoard(int SizeBoard, int NombreBombes);
-void CompteBombes(std::vector<std::vector<int>> Board);
+std::vector<std::vector<int>> GenerationBoard(int SizeBoard, int NombreBombes);
+std::vector<std::vector<int>> CompteBombes(std::vector<std::vector<int>> Board);
 
 #endif
