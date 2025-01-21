@@ -22,6 +22,9 @@ vector<vector<int>> GenerationBoard(int SizeBoard, int NombreBombes){
 
 		Board.push_back(VectorLigne);
 	}
+
+	Board = PlacementBombes(Board, NombreBombes, SizeBoard);
+
 	return Board;
 
 }
@@ -31,6 +34,17 @@ vector<vector<int>> PlacementBombes(std::vector<std::vector<int>> Board, int Nom
 	//La fonction prend un board vide
 	//Génère deux nombres aléatoires entre 0 et SizeBoard qui seront la position de la bombe
 	//Si une bombe est déjà à la position relancer la position aléatoire
+	if (NombreBombes < SizeBoard * SizeBoard) {
+		int NumeroBombe = 0;
+		while (NumeroBombe < NombreBombes) {
+			int PosX = rand() % SizeBoard;
+			int PosY = rand() % SizeBoard;
+			if (Board[PosY][PosX] != 'B') {
+				Board[PosY][PosX] = 'B';
+				NumeroBombe++;
+			}
+		}
+	}
 	return Board;
 }
 
