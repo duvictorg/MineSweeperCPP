@@ -94,11 +94,14 @@ vector<vector<int>> RevelationBoard(vector<vector<int>> Board, int ChoixPosY, in
 	vector<vector<int>> Positions = { {ChoixPosY,ChoixPosX} };
 	return Positions;
 }
-vector<vector<int>> ModifieBoard(vector<vector<int>> BoardCache, vector<vector<int>> BoardJoueur, vector<vector<int>> Positions){
+vector<vector<int>> ModifieBoard(vector<vector<int>> BoardCache, vector<vector<int>> BoardJoueur, vector<vector<int>> Positions, bool *EnVie){
 	//La fonction prend un vecteur de vecteurs en entrée et copie les valeurs aux positions du premier Board dans le deuxième et renvoie le Board Joueur
 	for (int index = 0; index < Positions.size(); index++)
 	{
 		BoardJoueur[Positions[index][0]][Positions[index][1]] = BoardCache[Positions[index][0]][Positions[index][1]];
+		if (BoardJoueur[Positions[index][0]][Positions[index][1]] == 'B') {
+			*EnVie = false;
+		}
 	}
 	return BoardJoueur;
 }
