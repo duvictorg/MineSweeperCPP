@@ -25,9 +25,6 @@ vector<vector<int>> GenerationBoard(int SizeBoard, int NombreBombes){
 		Board.push_back(VectorLigne);
 	}
 
-	Board = PlacementBombes(Board, NombreBombes, SizeBoard);
-	Board = CompteBombes(Board, SizeBoard);
-
 	return Board;
 
 }
@@ -93,8 +90,16 @@ vector<vector<int>> CompteBombes(vector<vector<int>> Board, int SizeBoard){
 	return Board;
 }
 
-vector<tuple<int>> RevelationBoard(vector<vector<int>> Board, int ChoixPosX, int ChoixPosY){
-	//La fonction prend le board et le choix de position à révéler et renvoie un vecteur de tuples de Positions à révéler
-	vector<tuple<int>> Positions;
+vector<vector<int>> RevelationBoard(vector<vector<int>> Board, int ChoixPosX, int ChoixPosY){
+	//La fonction prend le board et le choix de position à révéler et renvoie un vecteur de vecteurs de Positions à révéler
+	vector<vector<int>> Positions;
 	return Positions;
+}
+vector<vector<int>> ModifieBoard(vector<vector<int>> BoardCache, vector<vector<int>> BoardJoueur, vector<vector<int>> Positions){
+	//La fonction prend un vecteur de vecteurs en entrée et copie les valeurs aux positions du premier Board dans le deuxième et renvoie le Board Joueur
+	for (int index = 0; index < Positions.size(); index++)
+	{
+		BoardJoueur[Positions[index][0]][Positions[index][1]] = BoardCache[Positions[index][0]][Positions[index][1]];
+	}
+	return BoardJoueur;
 }
