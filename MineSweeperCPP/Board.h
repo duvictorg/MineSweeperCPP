@@ -1,5 +1,4 @@
 #include <vector>
-#include <tuple>
 #ifndef BOARD
 #define BOARD
 
@@ -8,5 +7,6 @@ std::vector<std::vector<int>> PlacementBombes(std::vector<std::vector<int>> Boar
 std::vector<std::vector<int>> CompteBombes(std::vector<std::vector<int>> Board, int SizeBoard);
 std::vector<std::vector<int>> RevelationBoard(std::vector<std::vector<int>> Board, int ChoixPosX, int ChoixPosY);
 std::vector<std::vector<int>> ModifieBoard(std::vector<std::vector<int>> BoardCache, std::vector<std::vector<int>> BoardJoueur, std::vector<std::vector<int>> Positions);
+
 
 #endif

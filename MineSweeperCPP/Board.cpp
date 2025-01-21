@@ -2,7 +2,6 @@
 #include <algorithm>
 #include <random>
 #include <vector>
-#include <tuple>
 #include "Board.h"
 using namespace std;
 
@@ -90,9 +89,9 @@ vector<vector<int>> CompteBombes(vector<vector<int>> Board, int SizeBoard){
 	return Board;
 }
 
-vector<vector<int>> RevelationBoard(vector<vector<int>> Board, int ChoixPosX, int ChoixPosY){
+vector<vector<int>> RevelationBoard(vector<vector<int>> Board, int ChoixPosY, int ChoixPosX){
 	//La fonction prend le board et le choix de position à révéler et renvoie un vecteur de vecteurs de Positions à révéler
-	vector<vector<int>> Positions;
+	vector<vector<int>> Positions = { {ChoixPosY,ChoixPosX} };
 	return Positions;
 }
 vector<vector<int>> ModifieBoard(vector<vector<int>> BoardCache, vector<vector<int>> BoardJoueur, vector<vector<int>> Positions){

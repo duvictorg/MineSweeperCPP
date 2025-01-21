@@ -128,10 +128,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Affichage.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="MineSweeperCPP.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Affichage.h" />
     <ClInclude Include="Board.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
