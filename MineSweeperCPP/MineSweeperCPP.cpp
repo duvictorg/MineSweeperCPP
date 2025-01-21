@@ -8,8 +8,8 @@ using namespace std;
 int main()
 {
     //Initialisation variables
-    int SizeBoard = 10;
-    int NombreBombes = 30;
+    int SizeBoard = 5;
+    int NombreBombes = 7;
     vector<vector<int>> BoardCache = GenerationBoard(SizeBoard, NombreBombes);
     vector<vector<int>> BoardJoueur = BoardCache;
 
@@ -18,7 +18,13 @@ int main()
     {
         for (int NumColonne = 0; NumColonne < SizeBoard; NumColonne++)
         {
-            cout << "[" << static_cast<char>(BoardCache[NumLigne][NumColonne]) << "]";
+            if (BoardCache[NumLigne][NumColonne] == 66) {
+                cout << "[" << static_cast<char>(BoardCache[NumLigne][NumColonne]) << "]";
+            }
+            else {
+                cout << "[" << BoardCache[NumLigne][NumColonne] << "]";
+            }
+            
         }
         cout << " < " << NumLigne << endl;
     }
