@@ -144,6 +144,7 @@ vector<vector<int>> RevelationBoard(vector<vector<int>> Board, int ChoixPosY, in
 vector<vector<int>> ModifieBoard(vector<vector<int>> BoardCache, vector<vector<int>> BoardJoueur, vector<vector<int>> Positions, bool *EnVie, int NombreBombes){
 	//La fonction prend un vecteur de vecteurs en entrée et copie les valeurs aux positions du premier Board dans le deuxième et renvoie le Board Joueur
 	int NbCasesCachees = 0;
+	int Wait;
 	for (int index = 0; index < Positions.size(); index++)
 	{
 		BoardJoueur[Positions[index][0]][Positions[index][1]] = BoardCache[Positions[index][0]][Positions[index][1]];
@@ -153,6 +154,7 @@ vector<vector<int>> ModifieBoard(vector<vector<int>> BoardCache, vector<vector<i
 			BoardJoueur[Positions[index][0]][Positions[index][1]] = 'X';
 			AfficheBoard(BoardJoueur, BoardCache, BoardCache.size());
 			cout << "PERDU !";
+			cin >> Wait;
 		}
 
 	}
@@ -165,6 +167,7 @@ vector<vector<int>> ModifieBoard(vector<vector<int>> BoardCache, vector<vector<i
 		system("cls");
 		AfficheBoard(BoardJoueur, BoardCache, BoardCache.size());
 		cout << "GAGNE !";
+		cin >> Wait;
 	}
 	return BoardJoueur;
 }
