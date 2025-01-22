@@ -8,16 +8,14 @@ using namespace std;
 void AfficheBoard(const vector<vector<int>>& BoardCache, const vector<vector<int>>& BoardJoueur, int SizeBoard) {
 	//Affiche le board
 	ostringstream output;
-	for (int NumLigne = 0; NumLigne < SizeBoard; NumLigne++)
-	{
-		for (int NumColonne = 0; NumColonne < SizeBoard; NumColonne++)
-		{
+	for (int NumLigne = 0; NumLigne < SizeBoard; NumLigne++){
+		for (auto& Case : BoardJoueur[NumLigne]) {
 			//vérifie si c'est autre chose que un numéro et affiche correctement selon la table ascii
-			if (BoardJoueur[NumLigne][NumColonne] > 9) {
-				output << "[" << static_cast<char>(BoardJoueur[NumLigne][NumColonne]) << "]";
+			if (Case > 9) {
+				output << "[" << static_cast<char>(Case) << "]";
 			}
 			else {
-				output << "[" << BoardJoueur[NumLigne][NumColonne] << "]";
+				output << "[" << Case << "]";
 			}
 
 		}
