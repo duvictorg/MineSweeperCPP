@@ -60,21 +60,21 @@ vector<vector<int>> CompteBombes(vector<vector<int>> Board, int SizeBoard){
 	//Parcourt le vecteur de vecteur et sur chaque bombe rajoute 1 au compteur de chaque case voisine sans bombe
 	//Puis uen fois fini remplace tous les # par du vide
 	//renvoie le board avec les numéros
-	for (int NumLigne = 0; NumLigne < SizeBoard; NumLigne++)
-	{
-		for (int NumColonne = 0; NumColonne < SizeBoard; NumColonne++)
-		{
+
+	vector<pair<int, int>> Voisins = { {-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1} };
+	for (int NumLigne = 0; NumLigne < SizeBoard; NumLigne++){
+		for (int NumColonne = 0; NumColonne < SizeBoard; NumColonne++){
 			if (Board[NumLigne][NumColonne] == 'B') {
-				for (int i = -1; i < 2; i++)
-				{
-					for (int j = -1; j < 2; j++) 
-					{
-						if ((NumLigne + i != -1) and (NumLigne + i != SizeBoard) and (NumColonne + j != -1) and (NumColonne + j != SizeBoard)) {
-							if (Board[NumLigne+i][NumColonne+j] != 'B' and Board[NumLigne + i][NumColonne + j] == '#') {
-								Board[NumLigne+i][NumColonne+j] = 1;
+				for (auto& voi : Voisins) {
+					int Ligne = NumLigne + voi.first;
+					int Colonne = NumColonne + voi.second;
+					if (Ligne >= 0 && Ligne < SizeBoard && Colonne >= 0 && Colonne < SizeBoard){
+						if (Board[Ligne][Colonne] != 'B') {
+							if (Board[Ligne][Colonne] == '#') {
+								Board[Ligne][Colonne] = 1;
 							}
-							else if (Board[NumLigne + i][NumColonne + j] != 'B' and Board[NumLigne + i][NumColonne + j] != '#') {
-								Board[NumLigne+i][NumColonne+j] = Board[NumLigne+i][NumColonne+j] + 1;
+							else {
+								Board[Ligne][Colonne] += 1;
 							}
 						}
 					}
@@ -103,6 +103,7 @@ vector<vector<int>> RevelationBoard(vector<vector<int>> Board, int ChoixPosY, in
 		PosActuelle.push_back(ChoixPosY);
 		PosActuelle.push_back(ChoixPosX);
 		ZeroCheck.push_back(PosActuelle);
+		vector<pair<int, int>> Voisins = { {-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1} };
 
 		//tant que la liste de 0 n'est pas vide
 		while (ZeroCheck.size() != 0)
@@ -111,24 +112,23 @@ vector<vector<int>> RevelationBoard(vector<vector<int>> Board, int ChoixPosY, in
 			ChoixPosY = ZeroCheck[0][0];
 			ChoixPosX = ZeroCheck[0][1];
 
-			//on parcourt les voisins et soit même
-			for (int i = -1; i < 2; i++){
-				for (int j = -1; j < 2; j++){
+			//on parcourt les voisins
+			for (auto& voi : Voisins){
+				int Ligne = ChoixPosY + voi.first;
+				int Colonne = ChoixPosX + voi.second;
+				//vérification de non sortie du board
+				if (Ligne >= 0 && Ligne < SizeBoard && Colonne >= 0 && Colonne < SizeBoard) {
 
-					//vérification de non sortie du board
-					if ((ChoixPosY + i != -1) and (ChoixPosY + i != SizeBoard) and (ChoixPosX + j != -1) and (ChoixPosX + j != SizeBoard)) {
+					//le vecteur de position actuelle est reset et mis à la position qu'on regarde
+					PosActuelle.clear();
+					PosActuelle.push_back(Ligne);
+					PosActuelle.push_back(Colonne);
 
-						//le vecteur de position actuelle est reset et mis à la position qu'on regarde
-						PosActuelle.clear();
-						PosActuelle.push_back(ChoixPosY+i);
-						PosActuelle.push_back(ChoixPosX+j);
-
-						//si la position n'a pas été déjà révélée on l'ajoute aux positions à révéler et si c'est une case vide on ajoute à la liste des 0
-						if (count(Positions.begin(), Positions.end(), PosActuelle) == 0) {
-							Positions.push_back(PosActuelle);
-							if (Board[ChoixPosY + i][ChoixPosX + j] == ' ') {
-								ZeroCheck.push_back(PosActuelle);
-							}
+					//si la position n'a pas été déjà révélée on l'ajoute aux positions à révéler et si c'est une case vide on ajoute à la liste des 0
+					if (count(Positions.begin(), Positions.end(), PosActuelle) == 0) {
+						Positions.push_back(PosActuelle);
+						if (Board[Ligne][Colonne] == ' ') {
+							ZeroCheck.push_back(PosActuelle);
 						}
 					}
 				}
