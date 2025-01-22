@@ -46,7 +46,7 @@ int main()
         cout << "Position en Largeur ? (de gauche à droite) : ";
         cin >> ChoixPosX;
         Positions = RevelationBoard(BoardCache, ChoixPosY, ChoixPosX);
-        BoardJoueur = ModifieBoard(BoardCache, BoardJoueur, Positions, ChangeVie);
+        BoardJoueur = ModifieBoard(BoardCache, BoardJoueur, Positions, ChangeVie, NombreBombes);
     }
 
     return 0;

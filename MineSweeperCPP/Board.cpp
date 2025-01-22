@@ -3,6 +3,7 @@
 #include <random>
 #include <vector>
 #include "Board.h"
+#include "Affichage.h"
 using namespace std;
 
 vector<vector<int>> GenerationBoard(int SizeBoard, int NombreBombes){
@@ -92,16 +93,78 @@ vector<vector<int>> CompteBombes(vector<vector<int>> Board, int SizeBoard){
 vector<vector<int>> RevelationBoard(vector<vector<int>> Board, int ChoixPosY, int ChoixPosX){
 	//La fonction prend le board et le choix de position à révéler et renvoie un vecteur de vecteurs de Positions à révéler
 	vector<vector<int>> Positions = { {ChoixPosY,ChoixPosX} };
+	vector<vector<int>> ZeroCheck;
+	vector<int> PosActuelle;
+	int SizeBoard = Board.size();
+
+	//si case vide
+	if (Board[ChoixPosY][ChoixPosX] == ' ') {
+		//on met la position actuelle avec notre choix de départ et on rajoute à liste de zéros
+		PosActuelle.push_back(ChoixPosY);
+		PosActuelle.push_back(ChoixPosX);
+		ZeroCheck.push_back(PosActuelle);
+
+		//tant que la liste de 0 n'est pas vide
+		while (ZeroCheck.size() != 0)
+		{
+			//on update les positions de départ
+			ChoixPosY = ZeroCheck[0][0];
+			ChoixPosX = ZeroCheck[0][1];
+
+			//on parcourt les voisins et soit même
+			for (int i = -1; i < 2; i++){
+				for (int j = -1; j < 2; j++){
+
+					//vérification de non sortie du board
+					if ((ChoixPosY + i != -1) and (ChoixPosY + i != SizeBoard) and (ChoixPosX + j != -1) and (ChoixPosX + j != SizeBoard)) {
+
+						//le vecteur de position actuelle est reset et mis à la position qu'on regarde
+						PosActuelle.clear();
+						PosActuelle.push_back(ChoixPosY+i);
+						PosActuelle.push_back(ChoixPosX+j);
+
+						//si la position n'a pas été déjà révélée on l'ajoute aux positions à révéler et si c'est une case vide on ajoute à la liste des 0
+						if (count(Positions.begin(), Positions.end(), PosActuelle) == 0) {
+							Positions.push_back(PosActuelle);
+							if (Board[ChoixPosY + i][ChoixPosX + j] == ' ') {
+								ZeroCheck.push_back(PosActuelle);
+							}
+						}
+					}
+				}
+			}
+
+			//on supprime le 0 qu'on vient de regarder
+			ZeroCheck.erase(ZeroCheck.begin());
+		}
+	}
+
 	return Positions;
 }
-vector<vector<int>> ModifieBoard(vector<vector<int>> BoardCache, vector<vector<int>> BoardJoueur, vector<vector<int>> Positions, bool *EnVie){
+vector<vector<int>> ModifieBoard(vector<vector<int>> BoardCache, vector<vector<int>> BoardJoueur, vector<vector<int>> Positions, bool *EnVie, int NombreBombes){
 	//La fonction prend un vecteur de vecteurs en entrée et copie les valeurs aux positions du premier Board dans le deuxième et renvoie le Board Joueur
+	int NbCasesCachees = 0;
 	for (int index = 0; index < Positions.size(); index++)
 	{
 		BoardJoueur[Positions[index][0]][Positions[index][1]] = BoardCache[Positions[index][0]][Positions[index][1]];
 		if (BoardJoueur[Positions[index][0]][Positions[index][1]] == 'B') {
 			*EnVie = false;
+			system("cls");
+			BoardJoueur[Positions[index][0]][Positions[index][1]] = 'X';
+			AfficheBoard(BoardJoueur, BoardCache, BoardCache.size());
+			cout << "PERDU !";
 		}
+
+	}
+	for (int NumLigne = 0; NumLigne < BoardCache.size(); NumLigne++) {
+		NbCasesCachees = NbCasesCachees + count(BoardJoueur[NumLigne].begin(), BoardJoueur[NumLigne].end(), '#');
+	}
+	 
+	if (NbCasesCachees == NombreBombes) {
+		*EnVie = false;
+		system("cls");
+		AfficheBoard(BoardJoueur, BoardCache, BoardCache.size());
+		cout << "GAGNE !";
 	}
 	return BoardJoueur;
 }
