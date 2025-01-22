@@ -67,7 +67,7 @@ vector<vector<int>> CompteBombes(vector<vector<int>> Board, int SizeBoard){
 	return Board;
 }
 
-vector<vector<int>> RevelationBoard(vector<vector<int>> Board, int ChoixPosY, int ChoixPosX){
+vector<vector<int>> RevelationBoard(const vector<vector<int>>& Board, int ChoixPosY, int ChoixPosX){
 	//La fonction prend le board et le choix de position à révéler et renvoie un vecteur de vecteurs de Positions à révéler
 	vector<vector<int>> Positions = { {ChoixPosY,ChoixPosX} };
 	vector<vector<int>> ZeroCheck;
@@ -118,7 +118,7 @@ vector<vector<int>> RevelationBoard(vector<vector<int>> Board, int ChoixPosY, in
 
 	return Positions;
 }
-vector<vector<int>> ModifieBoard(vector<vector<int>> BoardCache, vector<vector<int>> BoardJoueur, vector<vector<int>> Positions, bool *EnVie, int NombreBombes){
+vector<vector<int>> ModifieBoard(vector<vector<int>> BoardCache, vector<vector<int>> BoardJoueur, const vector<vector<int>>& Positions, bool *EnVie, int NombreBombes){
 	//La fonction prend un vecteur de vecteurs en entrée et copie les valeurs aux positions du premier Board dans le deuxième et renvoie le Board Joueur
 	int NbCasesCachees = 0;
 	int Wait;

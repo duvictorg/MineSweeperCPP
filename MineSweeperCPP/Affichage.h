@@ -2,6 +2,6 @@
 #ifndef AFFICHAGE
 #define AFFICHAGE
 
-void AfficheBoard(std::vector<std::vector<int>> BoardCache, std::vector<std::vector<int>> BoardJoueur, int SizeBoard);
+void AfficheBoard(const std::vector<std::vector<int>>& BoardCache, const std::vector<std::vector<int>>& BoardJoueur, int SizeBoard);
 
 #endif
