@@ -52,6 +52,7 @@ int main()
         cin >> ChoixPosX;
         Positions = RevelationBoard(BoardCache, ChoixPosY, ChoixPosX);
         BoardJoueur = ModifieBoard(BoardCache, BoardJoueur, Positions, ChangeVie, NombreBombes);
+        system("cls");
     }
 
     return 0;
