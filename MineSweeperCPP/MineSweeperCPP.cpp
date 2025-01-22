@@ -29,7 +29,7 @@ int main()
     system("cls");
 
     //Initialisation du Board
-    vector<vector<int>> BoardCache = GenerationBoard(SizeBoard, NombreBombes);
+    vector<vector<int>> BoardCache(SizeBoard, vector<int>(SizeBoard, '#'));
     vector<vector<int>> BoardJoueur = BoardCache;
     BoardCache = PlacementBombes(BoardCache, NombreBombes, SizeBoard);
     BoardCache = CompteBombes(BoardCache, SizeBoard);
