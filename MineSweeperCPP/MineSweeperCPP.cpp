@@ -10,23 +10,28 @@ using namespace std;
 int main()
 {
     //Initialisation variables
-    int SizeBoard = 9;
-    int NombreBombes = 7;
+    int SizeBoard = -1;
+    int NombreBombes = -1;
     int ChoixPosY;
     int ChoixPosX;
     vector<vector<int>> Positions;
     bool EnVie = true;
     bool *ChangeVie = &EnVie;
+    setlocale(LC_ALL, "fr_FR.UTF-8");
 
 
 
 
     //Demande utilisateur (Temporaire)
-    cout << "Taille du board ? : ";
-    cin >> SizeBoard;
-    cout << "Nombre de bombes ? : ";
-    cin >> NombreBombes;
-    system("cls");
+    while (SizeBoard <= 0 or NombreBombes <= 0 or SizeBoard > 50) {
+        cout << "Valeurs positives et non nulles" << endl;
+        cout << "Se mettre en plein écran pour les grands boards (50 MAX)" << endl;
+        cout << "Taille du board ? : ";
+        cin >> SizeBoard;
+        cout << "Nombre de bombes ? : ";
+        cin >> NombreBombes;
+        system("cls");
+    }
 
     //Initialisation du Board
     vector<vector<int>> BoardCache(SizeBoard, vector<int>(SizeBoard, '#'));
